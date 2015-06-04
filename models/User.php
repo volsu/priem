@@ -2,102 +2,87 @@
 
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
+use Yii;
+
+/**
+ * This is the model class for table "user".
+ *
+ * @property integer $id
+ * @property integer $object1
+ * @property integer $object2
+ * @property integer $object3
+ * @property string $oop_code
+ * @property string $oop_name
+ * @property string $type_document
+ * @property integer $is_benefit
+ * @property integer $is_olymp
+ * @property integer $is_target
+ * @property integer $is_enrolled
+ * @property integer $priority
+ * @property string $base_enroll
+ * @property string $order
+ * @property string $form
+ * @property string $level
+ * @property string $oop_base
+ * @property integer $is_expelled
+ * @property string $enrollee_code
+ * @property string $enrollee_name
+ * @property integer $total_balls
+ * @property integer $is_concurs_out
+ * @property integer $is_rec_by_priority
+ * @property integer $is_rec_by_other
+ */
+class User extends \yii\db\ActiveRecord
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
+    public static function tableName()
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return 'user';
     }
 
     /**
      * @inheritdoc
      */
-    public static function findIdentityByAccessToken($token, $type = null)
+    public function rules()
     {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param  string      $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+        return [
+            [['object1', 'object2', 'object3', 'is_benefit', 'is_olymp', 'is_target', 'is_enrolled', 'priority', 'is_expelled', 'total_balls', 'is_concurs_out', 'is_rec_by_priority', 'is_rec_by_other'], 'integer'],
+            [['oop_code', 'oop_name', 'type_document', 'base_enroll', 'order', 'form', 'level', 'oop_base', 'enrollee_code', 'enrollee_name'], 'string', 'max' => 255]
+        ];
     }
 
     /**
      * @inheritdoc
      */
-    public function getId()
+    public function attributeLabels()
     {
-        return $this->id;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
-    }
-
-    /**
-     * Validates password
-     *
-     * @param  string  $password password to validate
-     * @return boolean if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
+        return [
+            'id' => 'ID',
+            'object1' => 'Object1',
+            'object2' => 'Object2',
+            'object3' => 'Object3',
+            'oop_code' => 'Oop Code',
+            'oop_name' => 'Oop Name',
+            'type_document' => 'Type Document',
+            'is_benefit' => 'Is Benefit',
+            'is_olymp' => 'Is Olymp',
+            'is_target' => 'Is Target',
+            'is_enrolled' => 'Is Enrolled',
+            'priority' => 'Priority',
+            'base_enroll' => 'Base Enroll',
+            'order' => 'Order',
+            'form' => 'Form',
+            'level' => 'Level',
+            'oop_base' => 'Oop Base',
+            'is_expelled' => 'Is Expelled',
+            'enrollee_code' => 'Enrollee Code',
+            'enrollee_name' => 'Enrollee Name',
+            'total_balls' => 'Total Balls',
+            'is_concurs_out' => 'Is Concurs Out',
+            'is_rec_by_priority' => 'Is Rec By Priority',
+            'is_rec_by_other' => 'Is Rec By Other',
+        ];
     }
 }

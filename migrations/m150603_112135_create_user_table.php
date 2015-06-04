@@ -39,7 +39,6 @@ class m150603_112135_create_user_table extends Migration
         $this->createIndex('IForm', 'user', 'form');
         $this->createIndex('ITypePriem', 'user', 'oop_base');
         $this->createIndex('IBaseEnroll', 'user', 'base_enroll');
-
     }
 
     public function down()
