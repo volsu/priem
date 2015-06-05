@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Level;
+use app\models\RatingForm;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -49,6 +52,21 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $users = User::find()->all();
+
+        $levels = Level::find();
+
+        var_dump($levels);
+
+        return $this->render('index', ['users' => $users]);
+    }
+
+    public function actionRating()
+    {
+        $model = new RatingForm();
+
+        return $this->render('rating', [
+            'model' => $model
+        ]);
     }
 }
