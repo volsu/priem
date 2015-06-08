@@ -8,12 +8,13 @@
 
 namespace app\models;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
 
 class Level
 {
-    public static function find()
+    public static function items()
     {
         $query = new Query();
-        return $result = $query->select('cg_level')->distinct()->from('user')->all();
+        return $result = ArrayHelper::map($query->select('cg_level')->distinct()->from('user')->all(), 'cg_level', 'cg_level');
     }
 }

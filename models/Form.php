@@ -7,13 +7,15 @@
  */
 
 namespace app\models;
+use yii\base\Model;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
 
-class Form
+class Form extends Model
 {
-    public static function find()
+    public static function items()
     {
         $query = new Query();
-        return $result = $query->select('cg_form')->distinct()->from('user')->all();
+        return $result = ArrayHelper::map($query->select('cg_form')->distinct()->from('user')->all(), 'cg_form', 'cg_form');
     }
 }

@@ -36,7 +36,7 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'Рейтинг', 'url' => ['/site/rating']],
+                    ['label' => 'Рейтинг', 'url' => ['/rating']],
                     ['label' => 'Импорт', 'url' => ['/sync/start']],
                 ],
             ]);
