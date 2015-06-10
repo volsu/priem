@@ -6,12 +6,15 @@ use Yii;
 use app\components\SoapClient;
 use app\components\SoapConfig;
 use app\components\Util;
+use yii\db\Migration;
 
 class SyncController extends \yii\web\Controller
 {
     public function actionStart($token = null)
     {
         if(!is_null($token) && ($token === Yii::$app->params['token'])){
+
+            $this->truncateUserTable();
 
             $config = new SoapConfig(Yii::$app->params['wsdl_url'], Yii::$app->params['wsdl_login'], Yii::$app->params['wsdl_password']);
             $client = new SoapClient($config, 'Рейтинг', ['НомерПриемнойКомиссии' => '000000002']);
@@ -27,6 +30,12 @@ class SyncController extends \yii\web\Controller
             echo 'token not exist or invalid';
         }
         //return $this->render('start');
+    }
+
+    protected function truncateUserTable()
+    {
+        $migrate = new Migration();
+        $migrate->truncateTable('user');
     }
 
     protected function createUser($abiturient)

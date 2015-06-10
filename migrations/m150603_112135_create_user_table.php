@@ -38,6 +38,7 @@ class m150603_112135_create_user_table extends Migration
             'cg_unique_right'   => Schema::TYPE_SMALLINT, //КонкурснаяГруппа.ПриемЛицИмеющихОсобоеПраво
             'stat_plan'         => Schema::TYPE_INTEGER, //ЦифрыПриема.ПланПриема
             'stat_quota'        => Schema::TYPE_INTEGER, //ЦифрыПриема.Квота
+            'date_update'       => Schema::TYPE_TIMESTAMP.' NOT NULL DEFAULT CURRENT_TIMESTAMP', //Время добавления данных
         ]);
 
         $this->createIndex('Ilevel', 'user', 'cg_level');

@@ -8,13 +8,20 @@
 
 namespace app\models;
 use yii\db\Query;
-use yii\helpers\ArrayHelper;
+use app\components\Util;
 
 class Program
 {
-    public static function items()
+    public static function items($level = null)
     {
-        $query = new Query();
-        return $result = ArrayHelper::map($query->select('cg_oop_name')->distinct()->from('user')->indexBy('cg_oop_name')->all(), 'cg_oop_name', 'cg_oop_name');
+        $query      = new Query();
+        $query->select('cg_oop_name')->distinct()->from('user');
+        if($level){
+            $query->andWhere('cg_level = :level', [':level' => $level]);
+        }else{
+            $query->andWhere('1=0');
+        }
+        $programmes = $query->orderBy('cg_oop_name')->all();
+        return Util::indexArray($programmes, 'cg_oop_name');
     }
 }

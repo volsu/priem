@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Рейтинг');
+$this->title = Yii::t('app', 'Рейтинг 2015');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -17,7 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <span class="clearfix"></span>
 
-    <?= GridView::widget([
+    <div id="rating">
+
+    </div>
+    <?/*= GridView::widget([
         'dataProvider'  => $dataProvider,
         'columns'       => [
             ['class'        => 'yii\grid\SerialColumn'],
@@ -28,6 +31,5 @@ $this->params['breadcrumbs'][] = $this->title;
             'total_balls',
             'priority',
         ]
-    ]);?>
-
+    ]);*/?>
 </div>

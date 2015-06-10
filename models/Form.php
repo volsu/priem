@@ -9,13 +9,31 @@
 namespace app\models;
 use yii\base\Model;
 use yii\db\Query;
-use yii\helpers\ArrayHelper;
+use app\components\Util;
 
 class Form extends Model
 {
-    public static function items()
+    public static function items($level = null, $program = null)
     {
         $query = new Query();
-        return $result = ArrayHelper::map($query->select('cg_form')->distinct()->from('user')->all(), 'cg_form', 'cg_form');
+        $query->select('cg_form')->distinct()->from('user');
+        if($level && $program){
+            $query->andWhere('cg_level = :level', [
+                ':level'    => $level,
+            ]);
+            $query->andWhere('cg_oop_name = :oop', [
+                ':oop'      => $program
+            ]);
+        }
+        else{
+            $query->andWhere('1=0');
+        }
+
+
+        //$command = $query->createCommand();
+        //echo $command->rawSql;
+
+        $forms = $query->orderBy('cg_form')->all();
+        return Util::indexArray($forms, 'cg_form');
     }
 }
