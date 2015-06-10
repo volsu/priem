@@ -90,6 +90,17 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'cg_level', $this->cg_level])
             ->andFilterWhere(['like', 'cg_base', $this->cg_base]);
 
+        $query->orderBy([
+            'is_olymp'      => SORT_DESC,
+            'is_benefit'    => SORT_DESC,
+            'is_target'     => SORT_DESC,
+            'total_balls'   => SORT_DESC,
+            'object1'       => SORT_DESC,
+            'object2'       => SORT_DESC,
+            'object3'       => SORT_DESC,
+            'enrollee_name' => SORT_DESC
+        ]);
+
         return $dataProvider;
     }
 }
