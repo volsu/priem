@@ -98,7 +98,7 @@ class UserSearch extends User
             'object1'       => SORT_DESC,
             'object2'       => SORT_DESC,
             'object3'       => SORT_DESC,
-            'enrollee_name' => SORT_DESC
+            'enrollee_name' => SORT_ASC
         ]);
 
         return $dataProvider;
