@@ -1,3 +1,6 @@
+<?php
+use app\components\Rating;
+?>
 <?php foreach($models as $gc):?>
     <h2><?=$gc['view'];?></h2>
     <h4><b>План приема: </b><?=$gc['plan']?></h4>
@@ -16,9 +19,10 @@
             <th>Льготник</th>
             <th>Целевик</th>
         </tr>
+        <?php $i = 1;?>
         <?php foreach($gc['users'] as $user):?>
-            <tr>
-                <td>#</td>
+            <tr id="<?=$user->enrollee_code;?>" class="<?=Rating::isPassByConcurs($user);?>">
+                <td><?=$i;?></td>
                 <td><?=$user->enrollee_name;?></td>
                 <td><?=$user->object1;?></td>
                 <td><?=$user->object2;?></td>
@@ -30,6 +34,7 @@
                 <td><?= ($user->is_benefit) ? 'Да' : 'Нет';?></td>
                 <td><?= ($user->is_target) ? 'Да' : 'Нет';?></td>
             </tr>
+            <?php $i++;?>
         <?php endforeach;?>
     </table>
 <?php endforeach;?>

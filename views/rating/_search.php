@@ -18,8 +18,8 @@ use kartik\depdrop\DepDrop;
         'id'     => 'searchForm',
         'action' => ['rating/enrollee'],
         'method' => 'get',
-        'enableClientValidation'    => false,
-        'enableAjaxValidation'      => false
+        //'enableClientValidation'    => false,
+        //'enableAjaxValidation'      => false
     ]); ?>
 
     <?php  echo $form->field($model, 'cg_level' )->dropDownList(Level::items(), [

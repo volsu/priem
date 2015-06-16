@@ -28,6 +28,7 @@ class m150603_112135_create_user_table extends Migration
             'is_concurs_out'    => Schema::TYPE_SMALLINT, //ВыбылИзКонкурса
             'is_rec_by_priority'=> Schema::TYPE_SMALLINT, //РекомендованПоПриоритету
             'is_rec_by_other'   => Schema::TYPE_SMALLINT, //РекомендованПоДругомуПриоритету
+            'agreement_enroll'  => Schema::TYPE_SMALLINT, //СогласиеНаЗачисление
             'cg_code'           => Schema::TYPE_STRING, //КонкурснаяГруппа.Код
             'cg_view'           => Schema::TYPE_STRING, //КонкурснаяГруппа.Представление
             'cg_form'           => Schema::TYPE_STRING, //КонкурснаяГруппа.ФормаОбучения

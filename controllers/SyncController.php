@@ -17,7 +17,7 @@ class SyncController extends \yii\web\Controller
             $this->truncateUserTable();
 
             $config = new SoapConfig(Yii::$app->params['wsdl_url'], Yii::$app->params['wsdl_login'], Yii::$app->params['wsdl_password']);
-            $client = new SoapClient($config, 'Рейтинг', ['НомерПриемнойКомиссии' => '000000002']);
+            $client = new SoapClient($config, 'Рейтинг', ['НомерПриемнойКомиссии' => Yii::$app->params['numberPC']]);
 
             $abiturients = Util::toArray($client->getResponse()->РейтингСтрока);
 
@@ -60,6 +60,7 @@ class SyncController extends \yii\web\Controller
         $user->is_concurs_out               = ($abiturient->ВыбылИзКонкурса) ? 1 : 0;
         $user->is_rec_by_priority           = ($abiturient->РекомендованПоПриоритету) ? 1 : 0;
         $user->is_rec_by_other              = ($abiturient->РекомендованПоДругомуПриоритету) ? 1 : 0;
+        $user->agreement_enroll             = ($abiturient->СогласиеНаЗачисление) ? 1 : 0;
         $user->cg_code                      = $abiturient->КонкурснаяГруппа->Код;
         $user->cg_view                      = $abiturient->КонкурснаяГруппа->Представление;
         $user->cg_form                      = $abiturient->КонкурснаяГруппа->ФормаОбучения;

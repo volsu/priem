@@ -3,15 +3,10 @@
 namespace app\controllers;
 
 use app\components\Util;
-use app\models\Form;
-use app\models\Level;
-use app\models\Program;
 use app\models\RatingForm;
 use app\models\User;
 use Yii;
-use yii\db\Query;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -57,11 +52,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $users = User::find()->all();
-
-        $levels = Level::find();
-
-        var_dump($levels);
-
         return $this->render('index', ['users' => $users]);
     }
 

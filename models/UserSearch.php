@@ -92,13 +92,14 @@ class UserSearch extends User
 
         $query->orderBy([
             'is_olymp'      => SORT_DESC,
-            'is_benefit'    => SORT_DESC,
-            'is_target'     => SORT_DESC,
             'total_balls'   => SORT_DESC,
             'object1'       => SORT_DESC,
             'object2'       => SORT_DESC,
             'object3'       => SORT_DESC,
-            'enrollee_name' => SORT_ASC
+            'is_benefit'    => SORT_DESC,
+            //'is_target'     => SORT_DESC,
+            'enrollee_name' => SORT_ASC,
+
         ]);
 
         return $dataProvider;

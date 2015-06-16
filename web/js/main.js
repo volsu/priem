@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $('#search').click(function(e){
         e.preventDefault();
 
@@ -11,8 +12,6 @@ $(document).ready(function(){
 
             var $fillForm = $('#searchForm'),
                 url = $fillForm.attr("action");
-
-
 
             $.ajax({
                 type:   "POST",
