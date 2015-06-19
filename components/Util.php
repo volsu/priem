@@ -33,7 +33,7 @@ class Util {
     public static function groupUsersByGCCode(array $arr){
 
         $result = [];
-        $result[$arr[0]['cg_code']];
+        $result[$arr[0]['cg_code']]= [];
 
         foreach($arr as $user){
 

@@ -92,3 +92,6 @@ a.desc:after {
 .green{
     background-color: #BDF4BD;
 }
+table.table th {
+    text-align: center;
+}

@@ -15,11 +15,11 @@ class Rating {
     public static function isPassByConcurs(User $user){
 
         if($user->is_rec_by_priority && mb_strtolower($user->type_document) === mb_strtolower(self::ORIGINAL)){
-            return 'green';
+            return true;
         }
         if($user->is_rec_by_priority && $user->agreement_enroll){
-            return 'green';
+            return true;
         }
-        return 'default';
+        return false;
     }
 }
