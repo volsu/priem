@@ -6,7 +6,11 @@ use Yii;
 use app\components\SoapClient;
 use app\components\SoapConfig;
 use app\components\Util;
+use yii\db\Connection;
 use yii\db\Migration;
+use yii\db\pgsql\QueryBuilder;
+use yii\db\Query;
+use yii\helpers\VarDumper;
 
 class SyncController extends \yii\web\Controller
 {
@@ -14,28 +18,34 @@ class SyncController extends \yii\web\Controller
     {
         if(!is_null($token) && ($token === Yii::$app->params['token'])){
 
-            $this->truncateUserTable();
+
 
             $config = new SoapConfig(Yii::$app->params['wsdl_url'], Yii::$app->params['wsdl_login'], Yii::$app->params['wsdl_password']);
             $client = new SoapClient($config, 'Рейтинг', ['НомерПриемнойКомиссии' => Yii::$app->params['numberPC']]);
 
-            $abiturients = Util::toArray($client->getResponse()->РейтингСтрока);
+            if(isset($client->getResponse()->РейтингСтрока)){
 
-            foreach($abiturients as $abiturient){
-                $this->createUser($abiturient);
+                $this->truncateUserTable();
+
+                $abiturients = Util::toArray($client->getResponse()->РейтингСтрока);
+
+                $i = 1;
+                foreach($abiturients as $abiturient){
+                    $this->createUser($abiturient);
+                    $i++;
+                }
+                echo $i." human uploaded\r\n";
             }
-            echo 'done';
-
         }else{
             echo 'token not exist or invalid';
         }
-        //return $this->render('start');
     }
 
     protected function truncateUserTable()
     {
-        $migrate = new Migration();
-        $migrate->truncateTable('user');
+        $db         = Yii::$app->db;
+        $db->createCommand('TRUNCATE TABLE user')->execute();
+        echo "TABLE user cleaned\r\n";
     }
 
     protected function createUser($abiturient)
@@ -56,7 +66,7 @@ class SyncController extends \yii\web\Controller
         $user->is_expelled                  = ($abiturient->Отчислен) ? 1 : 0;
         $user->enrollee_code                = $abiturient->ФизическоеЛицо->Код;
         $user->enrollee_name                = $abiturient->ФизическоеЛицо->Наименование;
-        $user->total_balls                  = $abiturient->СуммаБалловПоПредметам;
+        $user->total_balls                  = $abiturient->СуммаБаллов;
         $user->is_concurs_out               = ($abiturient->ВыбылИзКонкурса) ? 1 : 0;
         $user->is_rec_by_priority           = ($abiturient->РекомендованПоПриоритету) ? 1 : 0;
         $user->is_rec_by_other              = ($abiturient->РекомендованПоДругомуПриоритету) ? 1 : 0;
