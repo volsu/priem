@@ -84,7 +84,7 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'enrollee_name', $this->enrollee_name])
             ->andFilterWhere(['like', 'cg_code', $this->cg_code])
             ->andFilterWhere(['like', 'cg_view', $this->cg_view])
-            ->andFilterWhere(['like', 'cg_form', $this->cg_form])
+            ->andFilterWhere(['like', 'cg_form', $this->cg_form.'%', false])
             ->andFilterWhere(['like', 'cg_oop_code', $this->cg_oop_code])
             ->andFilterWhere(['like', 'cg_oop_name', $this->cg_oop_name])
             ->andFilterWhere(['like', 'cg_level', $this->cg_level])
@@ -101,6 +101,10 @@ class UserSearch extends User
             'enrollee_name' => SORT_ASC,
 
         ]);
+
+
+        //$q = $query->createCommand();
+        //return $q->rawSql;
 
         return $dataProvider;
     }
