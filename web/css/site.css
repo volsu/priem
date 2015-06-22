@@ -95,3 +95,7 @@ a.desc:after {
 table.table th {
     text-align: center;
 }
+.custom-danger{
+    background-color: #d9534f;
+    vertical-align: top;
+}

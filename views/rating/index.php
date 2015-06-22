@@ -11,9 +11,10 @@ $this->title = Yii::t('app', 'Рейтинг 2015');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="page-header"><?= Html::encode($this->title);?><span class="badge custom-danger">Количество поданных заявлений: <?=$count;?></span></h1>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+        Popover on bottom
+    </button>
 
     <span class="clearfix"></span>
 

@@ -7,18 +7,21 @@ use app\models\Form;
 use app\models\Program;
 use Yii;
 use app\models\UserSearch;
+use yii\db\Query;
 use yii\helpers\Json;
 
 class RatingController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel    = new UserSearch();
+        $dataProvider   = $searchModel->search(Yii::$app->request->queryParams);
+        $count          = $this->enrolleeCount();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel'   => $searchModel,
+            'dataProvider'  => $dataProvider,
+            'count'         => $count
         ]);
     }
 
@@ -66,13 +69,23 @@ class RatingController extends \yii\web\Controller
             echo 'Не все данные переданы';
         }*/
 
+
+
         $searchModel    = new UserSearch();
         $dataProvider   = $searchModel->search(Yii::$app->request->bodyParams);
+
+        var_dump($dataProvider->getModels());
 
         $gc             = Util::groupUsersByGCCode($dataProvider->getModels());
         //echo Json::encode($dataProvider);
         return $this->renderAjax('rating', [
             'models' => $gc
         ]);
+    }
+
+    protected function enrolleeCount()
+    {
+        $count = (new Query())->from('user')->count();
+        return $count;
     }
 }
