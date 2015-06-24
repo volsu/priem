@@ -74,7 +74,7 @@ class RatingController extends \yii\web\Controller
         $searchModel    = new UserSearch();
         $dataProvider   = $searchModel->search(Yii::$app->request->bodyParams);
 
-        var_dump($dataProvider->getModels());
+        //var_dump($dataProvider->getModels());
 
         $gc             = Util::groupUsersByGCCode($dataProvider->getModels());
         //echo Json::encode($dataProvider);
