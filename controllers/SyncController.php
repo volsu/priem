@@ -68,7 +68,7 @@ class SyncController extends \yii\web\Controller
         $user->enrollee_name                = $abiturient->ФизическоеЛицо->Наименование;
         $user->total_balls                  = $abiturient->СуммаБаллов;
         $user->is_concurs_out               = ($abiturient->ВыбылИзКонкурса) ? 1 : 0;
-        $user->is_rec_by_priority           = ($abiturient->РекомендованПоПриоритету) ? 1 : 0;
+        $user->is_rec_by_priority           = ($abiturient->РекомендованПоПриоритету) ? $abiturient->РекомендованПоПриоритету : 0;
         $user->is_rec_by_other              = ($abiturient->РекомендованПоДругомуПриоритету) ? 1 : 0;
         $user->agreement_enroll             = ($abiturient->СогласиеНаЗачисление) ? 1 : 0;
         $user->cg_code                      = $abiturient->КонкурснаяГруппа->Код;
