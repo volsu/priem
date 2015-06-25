@@ -1,6 +1,17 @@
 <?php
 use app\components\Rating;
 ?>
+<div class="row">
+    <div class="col-lg-offset-6 pull-right">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="searchterm">Найти себя</label>
+                <input type="text" class="form-control" id="searchterm" placeholder="Например, иванов">
+                <a id="findme" href="#" class="btn btn-default">Найти</a>
+            </div>
+        </form>
+    </div>
+</div>
 <?php foreach($models as $gc):?>
     <h2><?=$gc['view'];?></h2>
     <h4><b>План приема: </b><?=$gc['plan']?></h4>
@@ -51,5 +62,25 @@ use app\components\Rating;
     </table>
 <?php endforeach;?>
 <?php
-\yii\helpers\VarDumper::dump($models, 10, true);
-?>
+$js = <<<EOD
+$(document).ready(function(){
+
+    $.expr[":"].contains = $.expr.createPseudo(function(arg) {
+        return function( elem ) {
+            return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+        };
+    });
+
+    $('#findme').click(function(e){
+        e.preventDefault();
+        var searchTerm = $('#searchterm').val();
+        if(searchTerm){
+            $("tr").removeClass("found");
+            $("td:contains("+searchTerm+")").parent('tr').addClass("found");
+        }else{
+            $("tr").removeClass("found");
+        }
+    });
+});
+EOD;
+$this->registerJs($js, \yii\web\View::POS_END);
