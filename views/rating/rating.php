@@ -3,7 +3,7 @@ use app\components\Rating;
 ?>
 <div class="row">
     <div class="col-lg-offset-6 pull-right">
-        <form class="form-inline">
+        <form id="findForm" class="form-inline">
             <div class="form-group">
                 <label for="searchterm">Найти себя</label>
                 <input type="text" class="form-control" id="searchterm" placeholder="Например, иванов">
@@ -69,6 +69,10 @@ $(document).ready(function(){
         return function( elem ) {
             return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
         };
+    });
+
+    $('#findForm').submit(function(e){
+        e.preventDefault();
     });
 
     $('#findme').click(function(e){
