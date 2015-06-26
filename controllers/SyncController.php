@@ -54,7 +54,7 @@ class SyncController extends \yii\web\Controller
         $user->object1                      = $abiturient->Предмет1;
         $user->object2                      = $abiturient->Предмет2;
         $user->object3                      = $abiturient->Предмет3;
-        $user->ind_achivement               = $abiturient->ИндивидуальноеДостижение1;
+        $user->ind_achivement               = $abiturient->СуммаБалловПоИД;
         $user->type_document                = $abiturient->ВидДокумента;
         $user->is_benefit                   = ($abiturient->Льготник) ? 1 : 0;
         $user->is_olymp                     = ($abiturient->Олимпиадник) ? 1 : 0;

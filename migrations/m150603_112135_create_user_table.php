@@ -12,7 +12,7 @@ class m150603_112135_create_user_table extends Migration
             'object1'           => Schema::TYPE_SMALLINT, //Предмет1
             'object2'           => Schema::TYPE_SMALLINT, //Предмет2
             'object3'           => Schema::TYPE_SMALLINT, //Предмет3
-            'ind_achivement'    => Schema::TYPE_SMALLINT, //ИндивидуальноеДостижение1
+            'ind_achivement'    => Schema::TYPE_SMALLINT, //СуммаБалловПоИД
             'type_document'     => Schema::TYPE_STRING, //ВидДокумента
             'is_benefit'        => Schema::TYPE_SMALLINT, //Льготник
             'is_olymp'          => Schema::TYPE_SMALLINT, //Олимпиадник
