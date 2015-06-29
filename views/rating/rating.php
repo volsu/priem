@@ -2,7 +2,10 @@
 use app\components\Rating;
 ?>
 <div class="row">
-    <div class="col-lg-offset-6 pull-right">
+    <div class="col-lg-6">
+        #
+    </div>
+    <div class="col-lg-6 pull-right">
         <form id="findForm" class="form-inline">
             <div class="form-group">
                 <label for="searchterm">Найти себя</label>
